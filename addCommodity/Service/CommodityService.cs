@@ -17,6 +17,16 @@ namespace addCommodity.Service
                 
             }
         }
+        public static Commodity get(long barcode,string name)
+        {
+            using (var db = new Context())
+            {
+
+                return db.Commodities.FirstOrDefault(c => c.Name == name &&
+                c.BarCode == barcode && c.MarketType == 1);
+
+            }
+        }
         public static object getall()
         {
             using (var db = new Context())
@@ -25,9 +35,26 @@ namespace addCommodity.Service
                 {
                     return null;
                 }
-                return db.Commodities.Where(c => c.State > 0).OrderBy(c=> c.date)
-                    .Select(c=> new {c.BarCode,c.Name,c.Brand,c.Unit,c.Multiplier,c.Price })
+                var list = db.Commodities.Where(c => c.State > 0).OrderBy(c=> c.date)
+                    .Select(c=> new {c.ID,c.BarCode,c.Name,c.Brand,c.date,c.Price})
                     .ToList();
+                var listCommodities = new List<Commodity>();
+                if (list != null)
+                {
+                    foreach (var item in list)
+                    {
+                        listCommodities.Add(new Commodity
+                        {
+                            ID=item.ID,
+                            BarCode = item.BarCode,
+                            Name = item.Name,
+                            Brand = item.Brand,
+                            PriceFormat = item.Price.ToString("N0"),
+                            dateString = item.date == null?"---": new PersianDateTime((DateTime)item.date).ToString("HH:mm - yy/MM/dd")
+                        });
+                    } 
+                }
+                return listCommodities;
 
             }
         }
@@ -38,6 +65,8 @@ namespace addCommodity.Service
                 commodity.State = 1;
                 commodity.MarketType = 1;
                 commodity.date = DateTime.Now;
+                commodity.Unit = "عدد";
+                commodity.Multiplier = 1;
                 db.Commodities.Add(commodity);
                 db.SaveChanges();
                 return true;
@@ -48,6 +77,7 @@ namespace addCommodity.Service
             using (var db = new Context())
             {
                 var oldCommodity = db.Commodities.Find(newCommodity.ID);
+                oldCommodity.BarCode = newCommodity.BarCode;
                 oldCommodity.Name = newCommodity.Name;
                 oldCommodity.Brand = newCommodity.Brand;
                 oldCommodity.Unit = newCommodity.Unit;
@@ -59,5 +89,24 @@ namespace addCommodity.Service
                 return true;
             }
         }
+
+        public static bool removeCommodity(long barcode,string name)
+        {
+            using (var db = new Context())
+            {
+                var commodity = db.Commodities.FirstOrDefault(c =>c.Name == name && c.BarCode == barcode
+                 && c.MarketType == 1);
+                if (commodity != null)
+                {
+                    commodity.State = 0;
+                    commodity.date = DateTime.Now;
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+        }
+        
+
     }
 }

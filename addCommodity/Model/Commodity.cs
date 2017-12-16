@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -18,6 +19,11 @@ namespace addCommodity.Model
         public int? CategoryID { get; set; }
         public int Price { get; set; }
         public int State { get; set; }
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
+
+        [NotMapped]
+        public string dateString { get; set; }
+        [NotMapped]
+        public string PriceFormat { get; set; }
     }
 }

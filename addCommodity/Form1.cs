@@ -23,7 +23,7 @@ namespace addCommodity
         }
 
         Commodity commodity;
-
+        int count = 0;
         void bindGrid()
         {
             radGridView1.DataSource = CommodityService.getall();
@@ -32,16 +32,18 @@ namespace addCommodity
                 radGridView1.Rows[radGridView1.Rows.Count - 1].IsCurrent = true;
             }
 
+            lblUser.Text = "کالاهای افزوده شده : " + radGridView1.Rows.Count;
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
-                bindGrid();
                 AppService apps = new AppService();
                 var info = apps.get();
                 lblMarketName.Text = info.Market;
-                lblUser.Text = info.User;
+                count = info.Count;
+                bindGrid();
                 lblDate.Text = PersianDateTime.Now.DayName + "  " + PersianDateTime.Now.Day + "  " + PersianDateTime.Now.MonthName + "  " + PersianDateTime.Now.Year;
             }
             catch (Exception ex)
@@ -53,20 +55,28 @@ namespace addCommodity
 
         void worker()
         {
-         
+
+
+
             Invoke(new Action(() => txtName.Text = ""));
             Invoke(new Action(() => txtBrand.Text = ""));
-            Invoke(new Action(() => txtUnit.Text = ""));
-            Invoke(new Action(() => txtMultipler.Text = ""));
             Invoke(new Action(() => txtPrice.Text = ""));
             Invoke(new Action(() => lblBarcode.Text = "- - -"));
-            
+            Invoke(new Action(() => lblMessageCommodity.Text = ""));
+            grpPrice.BackColor
+            = grpName.BackColor
+            = grpPrice.BackColor
+            = grpBrand.BackColor = Color.WhiteSmoke;
+
             long barcode = 0;
             long.TryParse(txtBarcode.Text.Trim(), out barcode);
             if (string.IsNullOrEmpty(txtBarcode.Text) || barcode == 0)
             {
+                timer1.Enabled = false;
                 return;
             }
+
+
             try
             {
                 commodity = CommodityService.get(barcode);
@@ -75,10 +85,8 @@ namespace addCommodity
 
                     Invoke(new Action(() => txtName.Text = commodity.Name));
                     Invoke(new Action(() => txtBrand.Text = commodity.Brand));
-                    Invoke(new Action(() => txtUnit.Text = commodity.Unit));
-                    Invoke(new Action(() => txtMultipler.Text = commodity.Multiplier+""));
-                    Invoke(new Action(() => txtPrice.Text = commodity.Price == 0 ? "" : commodity.Price + ""));
-                    
+                    Invoke(new Action(() => txtPrice.Text = commodity.Price == 0 ? "" : commodity.Price.ToString("N0")));
+
                     Invoke(new Action(() => lblMessageCommodity.Text = ""));
                     Invoke(new Action(() => lblMessageBarcode.Text = ""));
 
@@ -107,10 +115,9 @@ namespace addCommodity
             }
             timer1.Enabled = false;
         }
-        
+
         private void txtBarcode_TextChanged(object sender, EventArgs e)
         {
-
 
             timer1.Enabled = true;
         }
@@ -125,8 +132,8 @@ namespace addCommodity
         private void txtBarcode_Enter(object sender, EventArgs e)
         {
 
-                txtBarcode.Text = "آماده دریافت بار کد ...";
-            
+            txtBarcode.Text = "آماده دریافت بار کد ...";
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -137,12 +144,17 @@ namespace addCommodity
                 {
                     if (commodity == null)
                     {
-                       Commodity comm = new Commodity();
-                        comm.BarCode = long.Parse(lblBarcode.Text.Trim());
+                        Commodity comm = new Commodity();
+                        if (string.IsNullOrWhiteSpace(lblBarcode.Text) || lblBarcode.Text == "- - -")
+                        {
+                            comm.BarCode = 0;
+                        }
+                        else
+                        {
+                            comm.BarCode = long.Parse(lblBarcode.Text.Trim());
+                        }                        
                         comm.Name = txtName.Text.Trim();
                         comm.Brand = txtBrand.Text;
-                        comm.Unit = txtUnit.Text;
-                        comm.Multiplier = short.Parse(txtMultipler.Text);
                         comm.Price = int.Parse(txtPrice.Text.Replace(",", ""));
 
                         CommodityService.add(comm);
@@ -151,18 +163,17 @@ namespace addCommodity
                     }
                     else
                     {
-                        if (DontCheckedChangeValue())
-                        {
-                            commodity.State = 2;
-                        }
-                        else
+                        if (ISChangeValue())
                         {
                             commodity.State = 3;
                         }
+                        else
+                        {
+                            commodity.State = 2;
+                        }
+                        commodity.BarCode = long.Parse(lblBarcode.Text.Trim());
                         commodity.Name = txtName.Text.Trim();
                         commodity.Brand = txtBrand.Text;
-                        commodity.Unit = txtUnit.Text;
-                        commodity.Multiplier = short.Parse(txtMultipler.Text);
                         commodity.Price = int.Parse(txtPrice.Text.Replace(",", ""));
 
                         CommodityService.update(commodity);
@@ -174,7 +185,7 @@ namespace addCommodity
                 }
                 else
                 {
-                    lblMessageCommodity.Text = "ورودی اطلاعات دارای اشکال می باشد";
+                    //lblMessageCommodity.Text = "ورودی اطلاعات دارای اشکال می باشد";
                 }
             }
             catch (Exception ex)
@@ -196,57 +207,45 @@ namespace addCommodity
             grpPrice.BackColor
             = grpName.BackColor
             = grpPrice.BackColor
-            = grpUnit.BackColor
-            = grpBrand.BackColor
-            = grpMultipler.BackColor = Color.WhiteSmoke;
+            = grpBrand.BackColor = Color.WhiteSmoke;
 
             if (!Regex.IsMatch(txtPrice.Text, @"^[-+]?(?:[0-9]+,)*[0-9]+(?:\.[0-9]+)?$")
-                || string.IsNullOrEmpty(txtPrice.Text))
+                /*|| string.IsNullOrEmpty(txtPrice.Text)*/)
             {
                 grpPrice.BackColor = Color.Pink;
-                result = false;
-            }
-            if (!Regex.IsMatch(txtMultipler.Text, @"^[0-9]*$") || string.IsNullOrEmpty(txtMultipler.Text))
-            {
-                grpMultipler.BackColor = Color.Pink;
+                lblMessageCommodity.Text = "لطفا قیمت محصول را صحیح وارد کنید";
                 result = false;
             }
             if (string.IsNullOrEmpty(txtName.Text))
             {
                 grpName.BackColor = Color.Pink;
+                lblMessageCommodity.Text = lblMessageCommodity.Text == "" ? "نام محصول وارد نشده است" : lblMessageCommodity.Text + "\n" + "نام محصول وارد نشده است";
                 result = false;
             }
-            if (string.IsNullOrEmpty(txtUnit.Text))
+            if (!Regex.IsMatch(lblBarcode.Text, @"^[0-9]*$") && !string.IsNullOrEmpty(lblBarcode.Text) && lblBarcode.Text.Trim() != "- - -")
             {
-                grpUnit.BackColor = Color.Pink;
+                lblMessageCommodity.Text = lblMessageCommodity.Text == "" ? "فرمت بارکد اشتباه است" : lblMessageCommodity.Text + "\n" + "فرمت بارکد اشتباه است";
                 result = false;
             }
+
             return result;
         }
-        bool DontCheckedChangeValue()
+        bool ISChangeValue()
         {
             if (txtName.Text.Trim() != commodity.Name)
             {
-                return false;
+                return true;
             }
             if (txtBrand.Text.Trim() != commodity.Brand)
             {
-                return false;
+                return true;
             }
-            if (txtUnit.Text.Trim() != commodity.Unit)
-            {
-                return false;
-            }
-            if (txtMultipler.Text.Trim() != commodity.Multiplier.ToString())
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
 
         private void txtBarcode_TextChanging(object sender, TextChangingEventArgs e)
         {
-            
+
 
         }
 
@@ -298,25 +297,13 @@ namespace addCommodity
                     }
                 case Keys.F4:
                     {
-                        txtUnit.Select(0, txtUnit.Text.Length);
-                        txtUnit.Focus();
-                        break;
-                    }
-                case Keys.F5:
-                    {
-                        txtMultipler.Select(0, txtMultipler.Text.Length);
-                        txtMultipler.Focus();
-                        break;
-                    }
-                case Keys.F6:
-                    {
                         txtPrice.Select(0, txtPrice.Text.Length);
                         txtPrice.Focus();
                         break;
                     }
-                case Keys.F7:
+                case Keys.F5:
                     {
-                        btnSave_Click(null,null);
+                        btnSave_Click(null, null);
                         break;
                     }
                 case Keys.F1:
@@ -339,11 +326,18 @@ namespace addCommodity
 
         private void txtName_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.ShiftKey)
+            {
+                txtBrand.Text = txtName.SelectedText;
+                txtName.Text = txtName.Text.Replace(txtName.SelectedText, "");
+                return;
+            }
             focusKey(e.KeyCode);
         }
 
         private void txtUnit_KeyDown(object sender, KeyEventArgs e)
         {
+
             focusKey(e.KeyCode);
         }
 
@@ -387,6 +381,53 @@ namespace addCommodity
         {
             var apps = new AppService();
             apps.save(lblDate.Text);
+        }
+
+        private void radGridView1_CellClick(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
+        {
+            if (e.Row.Cells[0].Value == null)
+            {
+                return;
+            }
+            long barcode = 0;
+            long.TryParse(e.Row.Cells[0].Value.ToString(),out barcode);
+            Invoke(new Action(() => txtName.Text = ""));
+            Invoke(new Action(() => txtBrand.Text = ""));
+            Invoke(new Action(() => txtPrice.Text = ""));
+            Invoke(new Action(() => lblBarcode.Text = "- - -"));
+            Invoke(new Action(() => lblMessageCommodity.Text = ""));
+            grpPrice.BackColor
+            = grpName.BackColor
+            = grpPrice.BackColor
+            = grpBrand.BackColor = Color.WhiteSmoke;
+
+            if (e.ColumnIndex == 5)
+            {
+                if (MessageBox.Show("آیا از حذف این کالا مطمئن هستید ؟","حذف کالا",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    CommodityService.removeCommodity(barcode, e.Row.Cells[1].Value.ToString());
+                    bindGrid();
+                }
+                return;
+            }
+
+            commodity = CommodityService.get(barcode, e.Row.Cells[1].Value.ToString());
+
+            if (commodity != null)
+            {
+
+                Invoke(new Action(() => txtName.Text = commodity.Name));
+                Invoke(new Action(() => txtBrand.Text = commodity.Brand));
+                Invoke(new Action(() => txtPrice.Text = commodity.Price == 0 ? "" : commodity.Price.ToString("N0")));
+
+                Invoke(new Action(() => lblMessageCommodity.Text = ""));
+                Invoke(new Action(() => lblMessageBarcode.Text = ""));
+
+                Invoke(new Action(() => lblBarcode.Text = commodity.BarCode+""));
+
+                Invoke(new Action(() => txtPrice.Focus()));
+            }
+
         }
     }
 }

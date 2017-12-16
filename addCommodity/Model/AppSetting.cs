@@ -11,6 +11,7 @@ namespace addCommodity.Model
         public string Market { get; set; }
         public string User { get; set; }
         public string Date { get; set; }
+        public int Count { get; set; }
 
     }
 }

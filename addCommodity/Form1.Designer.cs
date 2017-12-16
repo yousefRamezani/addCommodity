@@ -34,7 +34,7 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn1 = new Telerik.WinControls.UI.GridViewCommandColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.grpBarCode = new Telerik.WinControls.UI.RadGroupBox();
@@ -45,10 +45,6 @@
             this.txtName = new Telerik.WinControls.UI.RadTextBox();
             this.grpBrand = new Telerik.WinControls.UI.RadGroupBox();
             this.txtBrand = new Telerik.WinControls.UI.RadTextBox();
-            this.grpUnit = new Telerik.WinControls.UI.RadGroupBox();
-            this.txtUnit = new Telerik.WinControls.UI.RadTextBox();
-            this.grpMultipler = new Telerik.WinControls.UI.RadGroupBox();
-            this.txtMultipler = new Telerik.WinControls.UI.RadTextBox();
             this.btnSave = new Telerik.WinControls.UI.RadButton();
             this.grpPrice = new Telerik.WinControls.UI.RadGroupBox();
             this.txtPrice = new Telerik.WinControls.UI.RadTextBox();
@@ -62,8 +58,8 @@
             this.lblUser = new Telerik.WinControls.UI.RadPanel();
             this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblBarcode = new Telerik.WinControls.UI.RadTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grpBarCode)).BeginInit();
             this.grpBarCode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBarcode)).BeginInit();
@@ -74,12 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grpBrand)).BeginInit();
             this.grpBrand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpUnit)).BeginInit();
-            this.grpUnit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpMultipler)).BeginInit();
-            this.grpMultipler.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMultipler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpPrice)).BeginInit();
             this.grpPrice.SuspendLayout();
@@ -110,7 +100,7 @@
             this.grpBarCode.Location = new System.Drawing.Point(0, 73);
             this.grpBarCode.Name = "grpBarCode";
             this.grpBarCode.Size = new System.Drawing.Size(1354, 102);
-            this.grpBarCode.TabIndex = 0;
+            this.grpBarCode.TabIndex = 1;
             this.grpBarCode.Text = "<html>(<span style=\"color: #ff0000\">F1</span>) - بارکد</html>";
             this.grpBarCode.ThemeName = "Windows8";
             ((Telerik.WinControls.UI.RadGroupBoxElement)(this.grpBarCode.GetChildAt(0))).HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
@@ -125,7 +115,7 @@
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.txtBarcode.Size = new System.Drawing.Size(1350, 31);
-            this.txtBarcode.TabIndex = 1;
+            this.txtBarcode.TabIndex = 3;
             this.txtBarcode.Text = "آماده دریافت بار کد ...";
             this.txtBarcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtBarcode.ThemeName = "Windows8";
@@ -146,7 +136,7 @@
             this.lblMessageBarcode.Location = new System.Drawing.Point(2, 18);
             this.lblMessageBarcode.Name = "lblMessageBarcode";
             this.lblMessageBarcode.Size = new System.Drawing.Size(1350, 43);
-            this.lblMessageBarcode.TabIndex = 11;
+            this.lblMessageBarcode.TabIndex = 2;
             this.lblMessageBarcode.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblMessageBarcode.ThemeName = "Windows8";
             this.lblMessageBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lblMessageBarcode_KeyDown);
@@ -164,10 +154,10 @@
             this.grpName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpName.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
             this.grpName.HeaderText = "<html>(<span style=\"color: #ff0000\">F3</span>) - نام کالا</html>";
-            this.grpName.Location = new System.Drawing.Point(16, 155);
+            this.grpName.Location = new System.Drawing.Point(16, 170);
             this.grpName.Name = "grpName";
             this.grpName.Size = new System.Drawing.Size(369, 63);
-            this.grpName.TabIndex = 2;
+            this.grpName.TabIndex = 7;
             this.grpName.Text = "<html>(<span style=\"color: #ff0000\">F3</span>) - نام کالا</html>";
             this.grpName.ThemeName = "Windows8";
             ((Telerik.WinControls.UI.RadGroupBoxElement)(this.grpName.GetChildAt(0))).HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
@@ -183,7 +173,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.txtName.Size = new System.Drawing.Size(365, 28);
-            this.txtName.TabIndex = 3;
+            this.txtName.TabIndex = 8;
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtName.ThemeName = "Windows8";
             this.txtName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyDown);
@@ -196,10 +186,10 @@
             this.grpBrand.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBrand.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
             this.grpBrand.HeaderText = "<html>(<span style=\"color: #ff0000\">F2</span>) - برند کالا</html>";
-            this.grpBrand.Location = new System.Drawing.Point(14, 58);
+            this.grpBrand.Location = new System.Drawing.Point(14, 74);
             this.grpBrand.Name = "grpBrand";
             this.grpBrand.Size = new System.Drawing.Size(371, 63);
-            this.grpBrand.TabIndex = 3;
+            this.grpBrand.TabIndex = 5;
             this.grpBrand.Text = "<html>(<span style=\"color: #ff0000\">F2</span>) - برند کالا</html>";
             this.grpBrand.ThemeName = "Windows8";
             ((Telerik.WinControls.UI.RadGroupBoxElement)(this.grpBrand.GetChildAt(0))).HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
@@ -215,84 +205,19 @@
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.txtBrand.Size = new System.Drawing.Size(367, 28);
-            this.txtBrand.TabIndex = 2;
+            this.txtBrand.TabIndex = 6;
             this.txtBrand.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtBrand.ThemeName = "Windows8";
             this.txtBrand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBrand_KeyDown);
             // 
-            // grpUnit
-            // 
-            this.grpUnit.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.grpUnit.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.grpUnit.Controls.Add(this.txtUnit);
-            this.grpUnit.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpUnit.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
-            this.grpUnit.HeaderText = "<html>(<span style=\"color: #ff0000\">F4</span>) - واحد</html>";
-            this.grpUnit.Location = new System.Drawing.Point(203, 252);
-            this.grpUnit.Name = "grpUnit";
-            this.grpUnit.Size = new System.Drawing.Size(180, 63);
-            this.grpUnit.TabIndex = 4;
-            this.grpUnit.Text = "<html>(<span style=\"color: #ff0000\">F4</span>) - واحد</html>";
-            this.grpUnit.ThemeName = "Windows8";
-            ((Telerik.WinControls.UI.RadGroupBoxElement)(this.grpUnit.GetChildAt(0))).HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
-            ((Telerik.WinControls.UI.GroupBoxHeader)(this.grpUnit.GetChildAt(0).GetChildAt(1))).GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Standard;
-            ((Telerik.WinControls.UI.GroupBoxHeader)(this.grpUnit.GetChildAt(0).GetChildAt(1))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            // 
-            // txtUnit
-            // 
-            this.txtUnit.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtUnit.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUnit.Location = new System.Drawing.Point(2, 33);
-            this.txtUnit.MaxLength = 10;
-            this.txtUnit.Name = "txtUnit";
-            this.txtUnit.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.txtUnit.Size = new System.Drawing.Size(176, 28);
-            this.txtUnit.TabIndex = 4;
-            this.txtUnit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtUnit.ThemeName = "Windows8";
-            this.txtUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUnit_KeyDown);
-            // 
-            // grpMultipler
-            // 
-            this.grpMultipler.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.grpMultipler.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.grpMultipler.Controls.Add(this.txtMultipler);
-            this.grpMultipler.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpMultipler.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
-            this.grpMultipler.HeaderText = "<html>(<span style=\"color: #ff0000\">F5</span>) - ضریب</html>";
-            this.grpMultipler.Location = new System.Drawing.Point(14, 252);
-            this.grpMultipler.Name = "grpMultipler";
-            this.grpMultipler.Size = new System.Drawing.Size(163, 63);
-            this.grpMultipler.TabIndex = 5;
-            this.grpMultipler.Text = "<html>(<span style=\"color: #ff0000\">F5</span>) - ضریب</html>";
-            this.grpMultipler.ThemeName = "Windows8";
-            ((Telerik.WinControls.UI.RadGroupBoxElement)(this.grpMultipler.GetChildAt(0))).HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
-            ((Telerik.WinControls.UI.GroupBoxHeader)(this.grpMultipler.GetChildAt(0).GetChildAt(1))).GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Standard;
-            ((Telerik.WinControls.UI.GroupBoxHeader)(this.grpMultipler.GetChildAt(0).GetChildAt(1))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            // 
-            // txtMultipler
-            // 
-            this.txtMultipler.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtMultipler.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMultipler.Location = new System.Drawing.Point(2, 33);
-            this.txtMultipler.MaxLength = 5;
-            this.txtMultipler.Name = "txtMultipler";
-            this.txtMultipler.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.txtMultipler.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtMultipler.Size = new System.Drawing.Size(159, 28);
-            this.txtMultipler.TabIndex = 5;
-            this.txtMultipler.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtMultipler.ThemeName = "Windows8";
-            this.txtMultipler.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMultipler_KeyDown);
-            // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(121, 432);
+            this.btnSave.Location = new System.Drawing.Point(121, 362);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(148, 52);
-            this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "<html>(<span style=\"color: #ff0000\">F7</span>) - ذخیره</html>";
+            this.btnSave.TabIndex = 11;
+            this.btnSave.Text = "<html>(<span style=\"color: #ff0000\">F5</span>) - ذخیره</html>";
             this.btnSave.ThemeName = "Windows8";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             this.btnSave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnSave_KeyDown);
@@ -305,12 +230,12 @@
             this.grpPrice.Controls.Add(this.txtPrice);
             this.grpPrice.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPrice.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
-            this.grpPrice.HeaderText = "<html>(<span style=\"color: #ff0000\">F6</span>) - قیمت کالا</html>";
-            this.grpPrice.Location = new System.Drawing.Point(18, 349);
+            this.grpPrice.HeaderText = "<html>(<span style=\"color: #ff0000\">F4</span>) - قیمت کالا</html>";
+            this.grpPrice.Location = new System.Drawing.Point(18, 266);
             this.grpPrice.Name = "grpPrice";
             this.grpPrice.Size = new System.Drawing.Size(367, 63);
-            this.grpPrice.TabIndex = 3;
-            this.grpPrice.Text = "<html>(<span style=\"color: #ff0000\">F6</span>) - قیمت کالا</html>";
+            this.grpPrice.TabIndex = 9;
+            this.grpPrice.Text = "<html>(<span style=\"color: #ff0000\">F4</span>) - قیمت کالا</html>";
             this.grpPrice.ThemeName = "Windows8";
             ((Telerik.WinControls.UI.RadGroupBoxElement)(this.grpPrice.GetChildAt(0))).HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center;
             ((Telerik.WinControls.UI.GroupBoxHeader)(this.grpPrice.GetChildAt(0).GetChildAt(1))).GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Standard;
@@ -326,7 +251,7 @@
             this.txtPrice.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.txtPrice.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtPrice.Size = new System.Drawing.Size(363, 28);
-            this.txtPrice.TabIndex = 6;
+            this.txtPrice.TabIndex = 10;
             this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPrice.ThemeName = "Windows8";
             this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
@@ -336,9 +261,9 @@
             // 
             this.lblMessageCommodity.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessageCommodity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(0)))), ((int)(((byte)(5)))));
-            this.lblMessageCommodity.Location = new System.Drawing.Point(7, 503);
+            this.lblMessageCommodity.Location = new System.Drawing.Point(7, 452);
             this.lblMessageCommodity.Name = "lblMessageCommodity";
-            this.lblMessageCommodity.Size = new System.Drawing.Size(376, 70);
+            this.lblMessageCommodity.Size = new System.Drawing.Size(376, 86);
             this.lblMessageCommodity.TabIndex = 9;
             this.lblMessageCommodity.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
             this.lblMessageCommodity.ThemeName = "Windows8";
@@ -425,43 +350,50 @@
             gridViewTextBoxColumn1.MaxWidth = 420;
             gridViewTextBoxColumn1.Name = "BarCode";
             gridViewTextBoxColumn1.ReadOnly = true;
-            gridViewTextBoxColumn1.Width = 200;
+            gridViewTextBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn1.Width = 170;
             gridViewTextBoxColumn2.FieldName = "Name";
             gridViewTextBoxColumn2.HeaderText = "نام";
             gridViewTextBoxColumn2.MaxWidth = 420;
             gridViewTextBoxColumn2.Name = "Name";
             gridViewTextBoxColumn2.ReadOnly = true;
+            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn2.Width = 300;
             gridViewTextBoxColumn3.FieldName = "Brand";
             gridViewTextBoxColumn3.HeaderText = "برند";
             gridViewTextBoxColumn3.MaxWidth = 200;
             gridViewTextBoxColumn3.Name = "Brand";
             gridViewTextBoxColumn3.ReadOnly = true;
+            gridViewTextBoxColumn3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn3.Width = 100;
-            gridViewTextBoxColumn4.FieldName = "Unit";
-            gridViewTextBoxColumn4.HeaderText = "واحد";
-            gridViewTextBoxColumn4.MaxWidth = 100;
-            gridViewTextBoxColumn4.Name = "Unit";
+            gridViewTextBoxColumn4.FieldName = "PriceFormat";
+            gridViewTextBoxColumn4.HeaderText = "قیمت";
+            gridViewTextBoxColumn4.MaxWidth = 200;
+            gridViewTextBoxColumn4.Name = "PriceFormat";
             gridViewTextBoxColumn4.ReadOnly = true;
-            gridViewTextBoxColumn4.Width = 61;
-            gridViewTextBoxColumn5.FieldName = "Multiplier";
-            gridViewTextBoxColumn5.HeaderText = "ضریب";
-            gridViewTextBoxColumn5.MaxWidth = 50;
-            gridViewTextBoxColumn5.Name = "Multiplier";
-            gridViewTextBoxColumn5.ReadOnly = true;
-            gridViewTextBoxColumn6.FieldName = "Price";
-            gridViewTextBoxColumn6.HeaderText = "قیمت";
-            gridViewTextBoxColumn6.MaxWidth = 200;
-            gridViewTextBoxColumn6.Name = "Price";
-            gridViewTextBoxColumn6.ReadOnly = true;
-            gridViewTextBoxColumn6.Width = 150;
+            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn4.Width = 80;
+            gridViewTextBoxColumn5.FieldName = "dateString";
+            gridViewTextBoxColumn5.HeaderText = "تاریخ";
+            gridViewTextBoxColumn5.MaxWidth = 200;
+            gridViewTextBoxColumn5.Name = "dateString";
+            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn5.Width = 140;
+            gridViewCommandColumn1.DefaultText = "حذف";
+            gridViewCommandColumn1.HeaderText = "";
+            gridViewCommandColumn1.Image = global::addCommodity.Properties.Resources.close_cross__1_;
+            gridViewCommandColumn1.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            gridViewCommandColumn1.Name = "column1";
+            gridViewCommandColumn1.StretchVertically = false;
+            gridViewCommandColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewCommandColumn1.Width = 25;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
             gridViewTextBoxColumn3,
             gridViewTextBoxColumn4,
             gridViewTextBoxColumn5,
-            gridViewTextBoxColumn6});
+            gridViewCommandColumn1});
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
             this.radGridView1.ReadOnly = true;
@@ -469,6 +401,7 @@
             this.radGridView1.TabIndex = 8;
             this.radGridView1.Text = "radGridView1";
             this.radGridView1.ThemeName = "Windows8";
+            this.radGridView1.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
             this.radGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.radGridView1_KeyDown);
             // 
             // panel2
@@ -479,24 +412,12 @@
             this.panel2.Controls.Add(this.grpName);
             this.panel2.Controls.Add(this.grpBrand);
             this.panel2.Controls.Add(this.lblMessageCommodity);
-            this.panel2.Controls.Add(this.grpUnit);
-            this.panel2.Controls.Add(this.grpMultipler);
             this.panel2.Controls.Add(this.grpPrice);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(966, 178);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(388, 555);
             this.panel2.TabIndex = 10;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(332, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "بارکد :";
             // 
             // lblBarcode
             // 
@@ -508,9 +429,19 @@
             this.lblBarcode.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.lblBarcode.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblBarcode.Size = new System.Drawing.Size(312, 28);
-            this.lblBarcode.TabIndex = 10;
+            this.lblBarcode.TabIndex = 4;
             this.lblBarcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.lblBarcode.ThemeName = "Windows8";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(332, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "بارکد :";
             // 
             // Form1
             // 
@@ -543,14 +474,6 @@
             this.grpBrand.ResumeLayout(false);
             this.grpBrand.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBrand)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpUnit)).EndInit();
-            this.grpUnit.ResumeLayout(false);
-            this.grpUnit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpMultipler)).EndInit();
-            this.grpMultipler.ResumeLayout(false);
-            this.grpMultipler.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMultipler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpPrice)).EndInit();
             this.grpPrice.ResumeLayout(false);
@@ -580,10 +503,6 @@
         private Telerik.WinControls.UI.RadGroupBox grpName;
         private Telerik.WinControls.UI.RadTextBox txtName;
         private Telerik.WinControls.UI.RadGroupBox grpBrand;
-        private Telerik.WinControls.UI.RadGroupBox grpUnit;
-        private Telerik.WinControls.UI.RadTextBox txtUnit;
-        private Telerik.WinControls.UI.RadGroupBox grpMultipler;
-        private Telerik.WinControls.UI.RadTextBox txtMultipler;
         private Telerik.WinControls.UI.RadButton btnSave;
         private Telerik.WinControls.UI.RadGroupBox grpPrice;
         private Telerik.WinControls.UI.RadTextBox txtPrice;
